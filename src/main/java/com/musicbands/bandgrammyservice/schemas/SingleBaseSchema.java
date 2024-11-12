@@ -5,9 +5,10 @@ import lombok.Data;
 
 @Data
 public class SingleBaseSchema {
-    @Schema(example = "First single")
+    @Schema(example = "Awesome single")
     private String name;
 
-    @Schema(example = "Awesome single")
+    @Schema(example = "Uplifting and introspective anthem.")
     private String description;
 }
+
