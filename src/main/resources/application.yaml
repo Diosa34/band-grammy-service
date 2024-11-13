@@ -18,21 +18,17 @@ springdoc:
     swagger-ui:
         disable-swagger-default-url: true
         path: /docs
-    default-produces-media-type: "application/json"
-    default-consumes-media-type: "application/json"
+    default-produces-media-type: "application/xml"
+    default-consumes-media-type: "application/xml"
 
 
 server:
     port: 8444
     ssl:
-        key-store-type: JKS
-        key-alias: *
-        key-store: *
-        key-store-password: *
-        key-password: *
-        enabled: true
-        trust-store: *
-        trust-store-password: *
+        key-store: classpath:keystore.p12
+        key-store-password: password
+        key-store-type: PKCS12
+        key-alias: grammy
 
 
 music-band-service:
