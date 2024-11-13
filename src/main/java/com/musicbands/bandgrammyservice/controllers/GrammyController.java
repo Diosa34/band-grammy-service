@@ -2,7 +2,15 @@ package com.musicbands.bandgrammyservice.controllers;
 
 import com.musicbands.bandgrammyservice.schemas.SingleBaseSchema;
 import com.musicbands.bandgrammyservice.schemas.SingleReadSchema;
+import com.musicbands.musicbandsservice.exceptions.schemas.BadRequestSchema;
+import com.musicbands.musicbandsservice.exceptions.schemas.InternalServerErrorSchema;
+import com.musicbands.musicbandsservice.exceptions.schemas.ObjectNotFoundSchema;
+import com.musicbands.musicbandsservice.exceptions.schemas.ValidationExceptionSchema;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +38,13 @@ public class GrammyController {
     private final RestTemplate restTemplate;
 
     @Operation(summary = "Добавить новый сингл группе")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Returns the music band that was just added a single to"),
+            @ApiResponse(responseCode = "400", description = "Invalid query param", content = @Content(schema = @Schema(implementation = BadRequestSchema.class))),
+            @ApiResponse(responseCode = "404", description = "Object not found", content = @Content(schema = @Schema(implementation = ObjectNotFoundSchema.class))),
+            @ApiResponse(responseCode = "422", description = "Validation error", content = @Content(schema = @Schema(implementation = ValidationExceptionSchema.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema(implementation = InternalServerErrorSchema.class)))
+    })
     @PostMapping("/{band-id}/singles/add")
     public ResponseEntity<SingleReadSchema> addSingle(
       @PathVariable("band-id") Long musicBandId,
