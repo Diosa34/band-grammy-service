@@ -1,14 +1,19 @@
-package com.musicbands.bandgrammyservice.schemas;
+package com.musicbands.bandgrammyservice.schemas.single;
 
-import com.musicbands.musicbandsservice.schemas.single.SingleBaseSchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Data
 @EqualsAndHashCode(callSuper = true)
+@Data
+@NoArgsConstructor
 public class SingleReadSchema extends SingleBaseSchema {
+    @Schema(example = "1")
+    @NotNull
+    private Long id;
+
     @Schema(example = "1")
     @NotNull
     private Long musicBandId;
