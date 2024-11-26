@@ -17,7 +17,7 @@ public class RewardService {
     private final MusicBandService musicBandService;
 
     public RewardReadSchema giveReward(Long toMusicBand, MusicGenre genre) {
-        // todo: check id
+        musicBandService.getMusicBand(toMusicBand); // проверка на существование
         Reward newReward = new Reward();
         newReward.setMusicBandId(toMusicBand);
         newReward.setGenre(genre);

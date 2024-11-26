@@ -14,9 +14,10 @@ import org.springframework.stereotype.Service;
 public class SingleService {
     private final SingleMapper singleMapper;
     private final SingleRepository singleRepository;
+    private final MusicBandService musicBandService;
 
     public SingleReadSchema createSingle(Long toMusicBand, SingleBaseSchema schema) {
-        // todo: check id
+        musicBandService.getMusicBand(toMusicBand);
         Single newSingle = singleMapper.mapSingleBaseToEntity(schema);
         newSingle.setMusicBandId(toMusicBand);
         newSingle = singleRepository.save(newSingle);
