@@ -1,0 +1,33 @@
+spring:
+    datasource:
+        url: ${DB_URL}
+        username: ${DB_USER}
+        password: ${DB_PWD}
+    jpa:
+        database: postgresql
+        generate-ddl: true
+        show-sql: true
+        properties:
+            hibernate:
+                ddl-auto: create
+                default_schema: band_grammy_service
+    sql:
+        init:
+            mode: always
+
+    application:
+        name: music-bands-service
+
+server:
+    port: 8445
+    ssl:
+        key-store: classpath:keystore.p12
+        key-store-password: password
+        key-store-type: PKCS12
+        key-alias: grammyejb
+
+application:
+    services:
+        music-bands:
+            host: ${MUSIC_BANDS_HOST:https://localhost}
+            port: ${MUSIC_BANDS_PORT:8443}

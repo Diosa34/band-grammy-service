@@ -1,0 +1,35 @@
+spring:
+    datasource:
+        url: ${DB_URL}
+        username: ${DB_USER}
+        password: ${DB_PWD}
+    jpa:
+        database: postgresql
+        generate-ddl: true
+        properties:
+            hibernate:
+                ddl-auto: update
+                default_schema: "music_bands_service"
+    sql:
+        init:
+            mode: always
+
+    application:
+        name: music-bands-service
+
+
+springdoc:
+    swagger-ui:
+        disable-swagger-default-url: true
+        path: /docs
+    default-produces-media-type: "application/xml"
+    default-consumes-media-type: "application/xml"
+
+
+server:
+    port: 8444
+    ssl:
+        key-store: classpath:keystore.p12
+        key-store-password: password
+        key-store-type: PKCS12
+        key-alias: grammy
