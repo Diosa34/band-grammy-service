@@ -18,6 +18,13 @@ spring:
     application:
         name: music-bands-service
 
+    task:
+        execution:
+            pool:
+                core-size: 10
+                max-size: 100
+                queue-capacity: 500
+
 server:
     port: 8445
     ssl:
