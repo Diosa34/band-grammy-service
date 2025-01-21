@@ -1,0 +1,88 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://example.com/please"
+           xmlns="http://example.com/please"
+           elementFormDefault="qualified">
+
+    <xs:element name="CreateRewardRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="musicBandId" type="xs:long"/>
+                <xs:element name="musicGenre" type="SoapMusicGenre" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+<!--    <xs:element name="CreateRewardResponse">-->
+<!--        <xs:complexType>-->
+<!--            <xs:sequence>-->
+<!--                <xs:element name="id" type="xs:long"/>-->
+<!--                <xs:element name="musicBandId" type="xs:long"/>-->
+<!--            </xs:sequence>-->
+<!--        </xs:complexType>-->
+<!--    </xs:element>-->
+
+    <xs:element name="CreateSingleRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="musicBandId" type="xs:long"/>
+                <xs:element name="schema" type="SOAPSingleBaseSchema"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+<!--    <xs:element name="CreateSingleResponse">-->
+<!--        <xs:complexType>-->
+<!--            <xs:sequence>-->
+<!--                <xs:element name="createSingleResponse" type="SOAPSingleReadSchema"/>-->
+<!--            </xs:sequence>-->
+<!--        </xs:complexType>-->
+<!--    </xs:element>-->
+
+    <xs:complexType name="SOAPRewardBaseSchema">
+        <xs:sequence>
+            <xs:element name="musicGenre" type="SoapMusicGenre"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="SOAPRewardReadSchema">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="SOAPRewardBaseSchema">
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long"/>
+                        <xs:element name="musicBandId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="SOAPSingleBaseSchema">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="SOAPSingleReadSchema">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="SOAPSingleBaseSchema">
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long"/>
+                        <xs:element name="musicBandId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="SoapMusicGenre">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ROCK"/>
+            <xs:enumeration value="RAP"/>
+            <xs:enumeration value="POST_ROCK"/>
+            <xs:enumeration value="PUNK_ROCK"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
