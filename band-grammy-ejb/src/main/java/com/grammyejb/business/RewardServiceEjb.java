@@ -27,7 +27,7 @@ public class RewardServiceEjb implements RewardServiceRemote {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
     public RewardReadSchema giveReward(Long toMusicBand, MusicGenre genre) {
-        musicBandService.getMusicBand(toMusicBand); // проверка на существование
+        System.out.println(musicBandService.getMusicBand(toMusicBand)); // проверка на существование
         Reward newReward = new Reward();
         newReward.setMusicBandId(toMusicBand);
         newReward.setGenre(genre);

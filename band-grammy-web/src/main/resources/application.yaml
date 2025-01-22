@@ -35,8 +35,8 @@ springdoc:
 
 server:
     port: 8444
-    ssl:
-        key-store: classpath:keystore.p12
-        key-store-password: password
-        key-store-type: PKCS12
-        key-alias: grammy
+#    ssl:
+#        key-store: classpath:keystore.p12
+#        key-store-password: password
+#        key-store-type: PKCS12
+#        key-alias: grammy

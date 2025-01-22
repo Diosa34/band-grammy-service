@@ -4,7 +4,7 @@ package com.grammyweb.controllers;
 import com.grammyejb.models.MusicGenre;
 import com.grammyejb.schemas.reward.RewardReadSchema;
 import com.grammyweb.jaxbgenerated.CreateRewardRequest;
-import com.grammyweb.jaxbgenerated.SOAPRewardReadSchema;
+import com.grammyweb.jaxbgenerated.CreateRewardResponse;
 import com.grammyweb.mappers.MusicGenreMapper;
 import com.grammyweb.mappers.RewardReadSchemaMapper;
 import com.grammyweb.services.RewardService;
@@ -22,13 +22,15 @@ public class RewardEndpoint {
     private static final String NAMESPACE_URI = "http://example.com/please";
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "CreateRewardRequest")
-    @ResponsePayload
-    public SOAPRewardReadSchema giveReward(@RequestPayload CreateRewardRequest saveRewardRequest) {
+    public @ResponsePayload CreateRewardResponse giveReward(@RequestPayload CreateRewardRequest saveRewardRequest) {
         Long musicBandId = saveRewardRequest.getMusicBandId();
         MusicGenre genre = MusicGenreMapper.MAPPER.map(saveRewardRequest.getMusicGenre());
 
-        RewardReadSchema response = rewardService.giveReward(musicBandId, genre);
-
-        return RewardReadSchemaMapper.MAPPER.map(response);
+        RewardReadSchema readScheme = rewardService.giveReward(musicBandId, genre);
+        CreateRewardResponse response = new CreateRewardResponse();
+        response.setId(readScheme.getId());
+        response.setMusicGenre(MusicGenreMapper.MAPPER.map(readScheme.getGenre()));
+        response.setMusicBandId(readScheme.getMusicBandId());
+        return response;
     }
 }

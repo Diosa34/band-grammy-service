@@ -95,7 +95,6 @@
             <groupId>com.musicbands</groupId>
             <artifactId>band-grammy-ejb</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.cloud</groupId>-->
